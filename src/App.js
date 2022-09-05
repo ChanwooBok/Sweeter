@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route
+} from "react-router-dom";
+import Auth from 'routes/Auth';
+import Home from 'routes/Home';
+import authService from 'fbase';
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    //console.log(authService.currentUser);
+    const [ isLoggedIn , setIsLoggedIn] = useState(authService.currentUser);
+    return (
+          <Router>
+            <Routes>
+                {isLoggedIn ? (
+                    <>
+                        <Route path={"/"} element={<Home />} />
+                    </>
+                ) : (
+                    <Route path={"/"} element={<Auth />} />
+                )}
+            </Routes>
+          </Router>
+      );
 }
 
 export default App;
