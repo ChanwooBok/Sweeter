@@ -1,4 +1,5 @@
-import authService from 'fbase';
+
+import { authService } from 'fbase';
 import { useNavigate } from 'react-router-dom';
 
 

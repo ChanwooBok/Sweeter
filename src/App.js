@@ -11,6 +11,7 @@ function App() {
 
     const [ init , setInit ] = useState(false); // to check if firebase is initialized
     const [ isLoggedIn , setIsLoggedIn] = useState(false);
+    const [ userObj , setUserObj ] = useState(null);
 
     useEffect( () => {
         const auth = getAuth();
@@ -18,6 +19,7 @@ function App() {
         onAuthStateChanged(auth , (user) => { 
             if(user) {
                 setIsLoggedIn(true);
+                setUserObj(user); // 상태가 변할때마다 user정보를 obj에 넣어준다. 로그인한 유저의 아이디를 얻기위함.(트윗작성 시)
             }else{
                 setIsLoggedIn(false);
             }
@@ -28,7 +30,7 @@ function App() {
 
     return (
         <>
-        { init ? <AppRouter isLoggedIn={isLoggedIn} /> : "initializiing..."}
+        { init ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} /> : "initializiing..."}
         </>
       );
 }

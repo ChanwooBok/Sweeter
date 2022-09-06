@@ -8,7 +8,9 @@ import Home from 'routes/Home';
 import Navigation from 'components/Navigation';
 import Profile from 'routes/Profile';
 
-function AppRouter ( { isLoggedIn } ) {
+function AppRouter ( { isLoggedIn , userObj } ) {
+
+
 
     return (
         <Router>
@@ -16,9 +18,8 @@ function AppRouter ( { isLoggedIn } ) {
             <Routes>
                 {isLoggedIn ? (
                     <>
-                        <Route path={"/"} element={<Home />} />
+                        <Route path={"/"} element={<Home userObj={userObj} />} />
                         <Route path={"/profile"} element={<Profile />} />
-                    
                     </>
                 ) : (
                     <Route path={"/"} element={<Auth />} />
