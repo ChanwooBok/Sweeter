@@ -51,7 +51,6 @@ const Home = ({ userObj }) => {
       collection(dbService, "sweets"),
       orderBy("createdAt", "desc")
     );
-
     onSnapshot(q, (snapshot) => {
       const sweetArray = snapshot.docs.map((document) => ({
         // snapshot.docs is an array of data -> ex) console.log(snapshot.docs); :  (4) [$u, $u, $u, $u]
