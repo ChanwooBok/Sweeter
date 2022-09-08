@@ -33,33 +33,33 @@ const Home = ({ userObj }) => {
     }
     */
   // < Getting realtime updates with Cloud Firestore 방법1.>
-  //    useEffect( () => {
-  //        //getSweets();
-  //        dbService.collection("sweets").onSnapshot( (snapshot) => {
-  //         const sweetArray = snapshot.docs.map( (doc) => ({
-  //             id : doc.id,
-  //             ...doc.data(),
-  //         }));
-  //         setSweets(sweetArray);
-  //        });
-  //        console.log(sweets);
-  //    } , []);
+  useEffect(() => {
+    //getSweets();
+    dbService.collection("sweets").onSnapshot((snapshot) => {
+      const sweetArray = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setSweets(sweetArray);
+    });
+    console.log(sweets);
+  }, []);
 
   //< Getting realtime updates with Cloud Firestore 방법2.>
-  useEffect(() => {
-    const q = query(
-      collection(dbService, "sweets"),
-      orderBy("createdAt", "desc")
-    );
-    onSnapshot(q, (snapshot) => {
-      const sweetArray = snapshot.docs.map((document) => ({
-        // snapshot.docs is an array of data -> ex) console.log(snapshot.docs); :  (4) [$u, $u, $u, $u]
-        id: document.id, // -> ex) r237bdqhfa947n19sdMm
-        ...document.data(), // -> ex) {createdAt: 1662468209248, creatorId: 'iB39OzyIkLNIsfM1uVg3abpuqtf2', text: 'asdf'}
-      }));
-      setSweets(sweetArray); // -> console.log(sweetArray); : (4) [{…}, {…}, {…}, {…}] each element has an object which consist of text,createdAt,createId
-    });
-  }, []);
+  // useEffect(() => {
+  //   const q = query(
+  //     collection(dbService, "sweets"),
+  //     orderBy("createdAt", "desc")
+  //   );
+  //   onSnapshot(q, (snapshot) => {
+  //     const sweetArray = snapshot.docs.map((document) => ({
+  //       // snapshot.docs is an array of data -> ex) console.log(snapshot.docs); :  (4) [$u, $u, $u, $u]
+  //       id: document.id, // -> ex) r237bdqhfa947n19sdMm
+  //       ...document.data(), // -> ex) {createdAt: 1662468209248, creatorId: 'iB39OzyIkLNIsfM1uVg3abpuqtf2', text: 'asdf'}
+  //     }));
+  //     setSweets(sweetArray); // -> console.log(sweetArray); : (4) [{…}, {…}, {…}, {…}] each element has an object which consist of text,createdAt,createId
+  //   });
+  // }, []);
 
   const onChange = (e) => {
     const {
