@@ -2,11 +2,19 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { dbService, storageService } from "fbase";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
+
+import "./SweetFactory.module.css";
+
 const SweetFactory = ({ userObj }) => {
   const [sweet, setSweet] = useState(""); // 트윗을 작성하기 위함.
   const [attachMent, setAttachMent] = useState("");
 
   const onSubmit = async (e) => {
+    if (sweet === "") {
+      return;
+    }
     e.preventDefault();
     /* 트윗 업로드는 나중에 , 우선 사진을 업로드 후, 트윗에 사진주소를 저장할것임.
         await dbService.collection("sweets").add({
@@ -70,26 +78,49 @@ const SweetFactory = ({ userObj }) => {
     reader.readAsDataURL(theFile); // getting data_url from files by this code.
   };
 
-  const onClearBtn = () => {
+  const onClearAttachment = () => {
     setAttachMent("");
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="factoryForm">
+      <div className="factoryInput__container">
+        <input
+          className="factoryInput__input"
+          type="text"
+          value={sweet}
+          onChange={onChange}
+          placeholder="What's on your mind?"
+          maxLength={120}
+        />
+        <input type="submit" value="Sweet" className="factoryInput__arrow" />
+      </div>
+      <label htmlFor="attach-file" className="factoryInput__label">
+        <span>Add photos</span>
+        <FontAwesomeIcon icon={faPlus} />
+      </label>
       <input
-        type="text"
-        value={sweet}
-        onChange={onChange}
-        placeholder="What's on your mind?"
-        maxLength={120}
+        id="attach-file"
+        type="file"
+        accept="image/*"
+        onChange={onFileChange}
+        style={{
+          opacity: 0,
+        }}
       />
-      <input type="submit" value="Sweet" />
-      <input type="file" accept="image/*" onChange={onFileChange} />
       {attachMent && (
-        <>
-          <img src={attachMent} height={"50px"} width={"50px"} />
-          <button onClick={onClearBtn}>Clear</button>
-        </>
+        <div className="factoryForm__attachment">
+          <img
+            src={attachMent}
+            style={{
+              backgroundImage: attachMent,
+            }}
+          />
+          <div className="factoryForm__clear" onClick={onClearAttachment}>
+            <span>Remove</span>
+            <FontAwesomeIcon icon={faTimes} />
+          </div>
+        </div>
       )}
     </form>
   );

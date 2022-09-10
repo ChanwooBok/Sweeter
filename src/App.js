@@ -20,12 +20,14 @@ function App() {
       if (user) {
         //setIsLoggedIn(true); -> 그냥 밑에서 Boolean(userObj) 으로 isLoggedIn 넘겨주면 된다. userObj가 존재한다면 그건 로그인 된거나 마찬가지이므로.
         if (user.displayName === null) {
-          // 로컬로그인할경우, null로 나오는 에러 해결.
+          // 로컬로그인할경우, null로 나오는 에러 해결 : user의 이메일 @앞에 이름을 가져다 이름으로 지정해줌.
           // user.displayName = user.email.split("@")[0]; 위 아래 방법 둘 다 같다.
           user.displayName = user.email.substring(0, user.email.indexOf("@"));
         }
         setUserObj(user); // 상태가 변할때마다 user정보를 obj에 넣어준다. 로그인한 유저의 아이디를 얻기위함.(트윗작성 시)
         //다만, user가 너무 방대한 object라 리액트가 작은변화를 감지하고 리렌더링하기가 힘들다.
+      } else {
+        setUserObj(null);
       }
       setInit(true); // firebase is initialized
     });
