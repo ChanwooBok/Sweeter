@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/sweeter/static/css/main.9c52671a.css",
+    "main.js": "/sweeter/static/js/main.81c1c5d6.js",
+    "index.html": "/sweeter/index.html",
+    "main.9c52671a.css.map": "/sweeter/static/css/main.9c52671a.css.map",
+    "main.81c1c5d6.js.map": "/sweeter/static/js/main.81c1c5d6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9c52671a.css",
+    "static/js/main.81c1c5d6.js"
+  ]
+}
