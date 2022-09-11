@@ -5,6 +5,9 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { authService } from "fbase";
+
+import styles from "./AuthForm.module.css";
+
 const AuthForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -54,7 +57,7 @@ const AuthForm = () => {
 
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="container">
         <input
           name="email"
           type="email"
@@ -62,6 +65,7 @@ const AuthForm = () => {
           value={email}
           onChange={onChange}
           required
+          className={styles.authInput}
         />
         <input
           name="password"
@@ -70,15 +74,17 @@ const AuthForm = () => {
           value={password}
           onChange={onChange}
           required
+          className={styles.authInput}
         />
         <input
           type="submit"
+          className={styles.authSubmit}
           value={newAccount ? "Create Account" : "Sign In"}
         />
-        {error}
+        {error && <span className={styles.authError}>{error}</span>}
       </form>
 
-      <span onClick={toggleAccount}>
+      <span onClick={toggleAccount} className={styles.authSwitch}>
         {newAccount ? "Sign in" : "Create Account"}
       </span>
     </>

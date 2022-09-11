@@ -4,6 +4,7 @@ import { deleteObject, ref } from "firebase/storage";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import styles from "./Sweet.module.css";
 
 const Sweet = ({ key, sweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
@@ -47,20 +48,24 @@ const Sweet = ({ key, sweetObj, isOwner }) => {
   };
 
   return (
-    <div className="sweet">
+    <div className={styles.sweet}>
       {editing ? (
         <>
-          <form onSubmit={onSubmit} className="container nweetEdit">
+          <form onSubmit={onSubmit} className={styles.sweetEdit}>
             <input
               type="text"
               value={newSweet}
-              placeholder="Edit your nweet"
+              placeholder="Edit your sweet"
               required
               autoFocus
               onChange={onChange}
               className="formInput"
             />
-            <input type="submit" value="Update Sweet" className="formBtn" />
+            <input
+              type="submit"
+              value="Update Sweet"
+              className={styles.formBtn}
+            />
           </form>
           <span onClick={toggleEditing} className="formBtn cancelBtn">
             Cancel
@@ -73,7 +78,7 @@ const Sweet = ({ key, sweetObj, isOwner }) => {
             <img src={sweetObj.attachmentUrl} width={"50px"} height={"50px"} />
           )}
           {isOwner && (
-            <div class="nweet__actions">
+            <div class={styles.sweet__actions}>
               <span onClick={onDeleteClick}>
                 <FontAwesomeIcon icon={faTrash} />
               </span>

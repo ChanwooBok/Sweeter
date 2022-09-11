@@ -13,6 +13,7 @@ import {
   faGoogle,
   faGithub,
 } from "@fortawesome/free-brands-svg-icons";
+import styles from "./Auth.css";
 
 function Auth() {
   const onSocialClick = async (e) => {
@@ -29,7 +30,7 @@ function Auth() {
   };
 
   return (
-    <div className="authContainer">
+    <div className={styles.authContainer}>
       <FontAwesomeIcon
         icon={faTwitter}
         color={"#04AAFF"}
@@ -37,11 +38,15 @@ function Auth() {
         style={{ marginBottom: 30 }}
       />
       <AuthForm />
-      <div className="authBtns">
-        <button onClick={onSocialClick} name="google" className="authBtn">
+      <div className={styles.authBtns}>
+        <button onClick={onSocialClick} name="google" className={styles.test}>
           Continue with Google <FontAwesomeIcon icon={faGoogle} />
         </button>
-        <button onClick={onSocialClick} name="github" className="authBtn">
+        <button
+          onClick={onSocialClick}
+          name="github"
+          className={styles.authBtn}
+        >
           Continue with Github <FontAwesomeIcon icon={faGithub} />
         </button>
       </div>

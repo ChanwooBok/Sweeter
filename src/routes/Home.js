@@ -8,9 +8,6 @@ import {
   query,
 } from "firebase/firestore";
 import Sweet from "components/Sweet";
-
-import { v4 as uuidv4 } from "uuid";
-import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import SweetFactory from "components/SweetFactory";
 
 const Home = ({ userObj }) => {
@@ -61,9 +58,9 @@ const Home = ({ userObj }) => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <SweetFactory userObj={userObj} />
-      <div>
+      <div style={{ marginTop: 30 }}>
         {sweets.map((sweet) => (
           <Sweet
             key={sweet.id}

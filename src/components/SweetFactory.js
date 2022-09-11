@@ -5,7 +5,7 @@ import { dbService, storageService } from "fbase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 
-import "./SweetFactory.module.css";
+import styles from "./SweetFactory.module.css";
 
 const SweetFactory = ({ userObj }) => {
   const [sweet, setSweet] = useState(""); // 트윗을 작성하기 위함.
@@ -48,7 +48,6 @@ const SweetFactory = ({ userObj }) => {
       creatorId: userObj.uid,
       attachmentUrl,
     };
-
     await dbService.collection("sweets").add(sweetObj);
     setSweet(""); //initializing
     setAttachMent("");
@@ -83,19 +82,23 @@ const SweetFactory = ({ userObj }) => {
   };
 
   return (
-    <form onSubmit={onSubmit} className="factoryForm">
-      <div className="factoryInput__container">
+    <form onSubmit={onSubmit} className={styles.factoryForm}>
+      <div className={styles.factoryInput__container}>
         <input
-          className="factoryInput__input"
+          className={styles.factoryInput__input}
           type="text"
           value={sweet}
           onChange={onChange}
           placeholder="What's on your mind?"
           maxLength={120}
         />
-        <input type="submit" value="Sweet" className="factoryInput__arrow" />
+        <input
+          type="submit"
+          value="Sweet"
+          className={styles.factoryInput__arrow}
+        />
       </div>
-      <label htmlFor="attach-file" className="factoryInput__label">
+      <label htmlFor="attach-file" className={styles.factoryInput__label}>
         <span>Add photos</span>
         <FontAwesomeIcon icon={faPlus} />
       </label>
@@ -109,14 +112,17 @@ const SweetFactory = ({ userObj }) => {
         }}
       />
       {attachMent && (
-        <div className="factoryForm__attachment">
+        <div className={styles.factoryForm__attachment}>
           <img
             src={attachMent}
             style={{
               backgroundImage: attachMent,
             }}
           />
-          <div className="factoryForm__clear" onClick={onClearAttachment}>
+          <div
+            className={styles.factoryForm__clear}
+            onClick={onClearAttachment}
+          >
             <span>Remove</span>
             <FontAwesomeIcon icon={faTimes} />
           </div>
