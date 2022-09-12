@@ -26,7 +26,7 @@ function App() {
         }
         setUserObj(user); // 상태가 변할때마다 user정보를 obj에 넣어준다. 로그인한 유저의 아이디를 얻기위함.(트윗작성 시)
         //다만, user가 너무 방대한 object라 리액트가 작은변화를 감지하고 리렌더링하기가 힘들다.
-      } else {
+      } else { // logout 할때 userObj비워주기. 
         setUserObj(null);
       }
       setInit(true); // firebase is initialized
